@@ -6,7 +6,7 @@
       <input type="text"
              class="form-control"
              id="username"
-             ngModel
+             [(ngModel)]="user.username"
              name="username"
              required>
     </div>
@@ -15,7 +15,7 @@
       <input type="text"
              class="form-control"
              id="email"
-             ngModel
+             [(ngModel)]="user.email"
              name="email"
              pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
              required
@@ -29,7 +29,7 @@
     <input type="password"
            class="form-control"
            id="password"
-           ngModel
+           [(ngModel)]="user.password"
            name="password"
            required>
   </div>
@@ -41,3 +41,8 @@
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
+<div>
+  <p>{{ user.username }}</p>
+  <p>{{ user.email }}</p>
+  <p>{{ user.password }}</p>
+</div>

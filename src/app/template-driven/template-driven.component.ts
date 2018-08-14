@@ -12,6 +12,12 @@ import {NgForm} from '@angular/forms';
 })
 export class TemplateDrivenComponent implements OnInit {
 
+  user = {
+    username: 'bstaub',
+    email: 'bruno.staub@gmail.com',
+    password: 'YourPass'
+  }
+
   constructor() { }
 
   ngOnInit() {
