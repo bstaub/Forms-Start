@@ -15,8 +15,14 @@ export class TemplateDrivenComponent implements OnInit {
   user = {
     username: 'bstaub',
     email: 'bruno.staub@gmail.com',
-    password: 'YourPass'
+    password: 'YourPass',
+    gender: 'männlich'
   }
+
+  genders = [
+    'männlich',
+    'weiblich'
+  ]
 
   constructor() { }
 
