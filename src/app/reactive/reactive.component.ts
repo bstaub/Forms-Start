@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
   templateUrl: './reactive.component.html',
-  styles: []
+  styles: [`
+    input.ng-touched.ng-invalid {
+      border: 1px solid red;
+    }
+  `]
 })
 export class ReactiveComponent implements OnInit {
   myForm: FormGroup;
@@ -17,9 +21,12 @@ export class ReactiveComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = new FormGroup({
-      'username': new FormControl(null),
-      'email': new FormControl(null),
-      'password': new FormControl(null),
+      'username': new FormControl(null, Validators.required),  // synchrone überprüfung
+      'email': new FormControl(null, [
+        Validators.required,
+        Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+      ]),
+      'password': new FormControl(null, Validators.required),
     });
   }
 

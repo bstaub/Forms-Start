@@ -15,6 +15,8 @@
              id="email"
              formControlName="email">
     </div>
+    <!--<div *ngIf="!myForm.controls['email'].valid">Ungültige Mailadresse</div>-->
+    <div *ngIf="!myForm.get('email').valid">Ungültige Mailadresse</div>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
@@ -29,5 +31,5 @@
       >
     </label>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
 </form>
