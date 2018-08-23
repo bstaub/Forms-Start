@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ReactiveComponent implements OnInit {
+  myForm: FormGroup;
 
   constructor() { }
 
+  onSubmit() {
+    console.log(this.myForm);
+  }
+
   ngOnInit() {
+    this.myForm = new FormGroup({
+      'username': new FormControl(null),
+      'email': new FormControl(null),
+      'password': new FormControl(null),
+    });
   }
 
 }

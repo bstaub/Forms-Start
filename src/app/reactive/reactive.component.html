@@ -1,19 +1,19 @@
-<h1>Template Driven</h1>
-<form>
+<h1>Reactive</h1>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">  <!-- erstelle nicht automatisch ein Form sondern weise myForm (raactive) hinzu -->
   <div>
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text"
              class="form-control"
              id="username"
-      >
+             formControlName="username">  <!-- formControlName brauche ich für synchronisierung (reactive) -->
     </div>
     <div class="form-group">
       <label for="email">E-Mail</label>
       <input type="text"
              class="form-control"
              id="email"
-      >
+             formControlName="email">
     </div>
   </div>
   <div class="form-group">
@@ -21,7 +21,7 @@
     <input type="password"
            class="form-control"
            id="password"
-    >
+           formControlName="password">
   </div>
   <div class="radio">
     <label>
