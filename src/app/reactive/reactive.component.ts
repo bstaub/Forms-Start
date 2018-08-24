@@ -13,6 +13,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ReactiveComponent implements OnInit {
   myForm: FormGroup;
 
+  genders = [
+    'männlich',
+    'weiblich'
+  ];
+
   constructor() { }
 
   onSubmit() {
@@ -29,6 +34,7 @@ export class ReactiveComponent implements OnInit {
         ])
       }),
       'password': new FormControl(null, Validators.required),
+      'gender': new FormControl('männlich')
     });
   }
 
