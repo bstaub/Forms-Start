@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -18,7 +18,7 @@ export class ReactiveComponent implements OnInit {
     'weiblich'
   ];
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   onSubmit() {
     console.log(this.myForm);
@@ -28,18 +28,32 @@ export class ReactiveComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myForm = new FormGroup({
-      'userData': new FormGroup({
-        'username': new FormControl(null, Validators.required),  // synchrone überprüfung
-        'email': new FormControl(null, [
+    // this.myForm = new FormGroup({
+    //   'userData': new FormGroup({
+    //     'username': new FormControl(null, Validators.required),  // synchrone überprüfung
+    //     'email': new FormControl(null, [
+    //       Validators.required,
+    //       Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+    //     ])
+    //   }),
+    //   'password': new FormControl(null, Validators.required),
+    //   'gender': new FormControl('männlich'),
+    //   'hobbies': new FormArray([
+    //     new FormControl('Cooking', Validators.required)
+    //   ])
+    // });
+    this.myForm = this.formBuilder.group({
+      'userData': this.formBuilder.group({
+        'username': this.formBuilder.control(null, Validators.required),
+        'email': this.formBuilder.control(null, [
           Validators.required,
-          Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+          Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
         ])
       }),
-      'password': new FormControl(null, Validators.required),
-      'gender': new FormControl('männlich'),
-      'hobbies': new FormArray([
-        new FormControl('Cooking', Validators.required)
+      'password': [null, Validators.required],
+      'gender': ['männlich'],
+      'hobbies': this.formBuilder.array([
+        [null, Validators.required]
       ])
     });
   }
