@@ -23,6 +23,7 @@ export class ReactiveComponent implements OnInit {
 
   onSubmit() {
     console.log(this.myForm);
+    this.myForm.reset();
   }
   onAddHobby() {
     (<FormArray>this.myForm.get('hobbies')).push( new FormControl('', Validators.required));
@@ -60,6 +61,14 @@ export class ReactiveComponent implements OnInit {
         [null, Validators.required, this.asyncExampleValidator]
       ])
     });
+
+    // this.myForm.valueChanges.subscribe(
+    //   (data: any) => console.log(data)
+    // );
+    this.myForm.statusChanges.subscribe(
+      (data: any) => console.log(data)
+    );
+
   }
 
   exampleValidator(control: FormControl): {[s: string]: boolean} {
@@ -83,5 +92,6 @@ export class ReactiveComponent implements OnInit {
     );
     return promise;
   }
+
 
 }
