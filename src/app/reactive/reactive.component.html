@@ -34,5 +34,12 @@
       >{{ g }}
     </label>
   </div>
+  <div formArrayName="hobbies"> <!-- bezieht sich nicht auf property, sondern index von element -->
+    <h3>Hobbies</h3>
+    <div class="form-group" *ngFor="let hobby of myForm.get('hobbies').controls; let i = index">
+      <input type="text" class="form-control" formControlName="{{ i }}">
+    </div>
+  </div>
+  <button type="button" class="btn btn-default" (click)="onAddHobby()">Neues Hobby hinzufügen</button>
   <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
 </form>
