@@ -44,7 +44,10 @@ export class ReactiveComponent implements OnInit {
     // });
     this.myForm = this.formBuilder.group({
       'userData': this.formBuilder.group({
-        'username': this.formBuilder.control(null, Validators.required),
+        'username': this.formBuilder.control(null, [
+          Validators.required,
+          this.exampleValidator
+        ]),
         'email': this.formBuilder.control(null, [
           Validators.required,
           Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
@@ -56,6 +59,13 @@ export class ReactiveComponent implements OnInit {
         [null, Validators.required]
       ])
     });
+  }
+
+  exampleValidator(control: FormControl): {[s: string]: boolean} {
+    if (control.value === 'Example') { // ex. wenn ich example eingebe ist diese control nicht mehr valide!
+      return {example : true}; // rückgabewert von [s: string] : boolean, siehe oben
+    }
+    return null;  // wenn null zurückgegeben, bestanden, sonst durchgefallen!
   }
 
 }
