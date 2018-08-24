@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Observable} from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-reactive',
@@ -39,7 +40,7 @@ export class ReactiveComponent implements OnInit {
     //   'password': new FormControl(null, Validators.required),
     //   'gender': new FormControl('männlich'),
     //   'hobbies': new FormArray([
-    //     new FormControl('Cooking', Validators.required)
+    //     new FormControl('Cooking', Validators.required, this.asyncExampleValidator)
     //   ])
     // });
     this.myForm = this.formBuilder.group({
@@ -56,7 +57,7 @@ export class ReactiveComponent implements OnInit {
       'password': [null, Validators.required],
       'gender': ['männlich'],
       'hobbies': this.formBuilder.array([
-        [null, Validators.required]
+        [null, Validators.required, this.asyncExampleValidator]
       ])
     });
   }
@@ -66,6 +67,21 @@ export class ReactiveComponent implements OnInit {
       return {example : true}; // rückgabewert von [s: string] : boolean, siehe oben
     }
     return null;  // wenn null zurückgegeben, bestanden, sonst durchgefallen!
+  }
+
+  asyncExampleValidator(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>(
+      (resolve, reject) => {
+        setTimeout(() => {
+          if (control.value === 'Example') {
+            resolve({asyncExample: true}); // wenn ich was spezielles zurückgebe, dann ist es nicht valide
+          } else {
+            resolve(null);  // valide
+          }
+        }, 1500);
+      }
+    );
+    return promise;
   }
 
 }
